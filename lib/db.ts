@@ -18,12 +18,12 @@ export async function connectToDatabase() {
   }
 
   if (!cached.promise) {
-    const opts = {
-      bufferCommands: true,
-      maxPoolSize: 10,
-    };
+    // const opts = {
+    //   bufferCommands: true,
+    //   maxPoolSize: 10,
+    // };
 
-    mongoose.connect(MONGODB_URI, opts).then(() => mongoose.connection);
+    mongoose.connect(MONGODB_URI).then(() => mongoose.connection);
   }
 
   try {

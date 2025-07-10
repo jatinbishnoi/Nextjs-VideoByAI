@@ -1,6 +1,7 @@
 import { connectToDatabase } from "@/lib/db";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,9 +24,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     await User.create({
       email,
-      password,
+      password: hashedPassword,
     });
 
     return NextResponse.json(
@@ -36,7 +39,7 @@ export async function POST(request: NextRequest) {
     console.error("Registration error", error);
     return NextResponse.json(
       { error: "Failed to register user" },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }
