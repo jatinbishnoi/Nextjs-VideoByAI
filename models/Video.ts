@@ -1,8 +1,8 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
 export const VIDEO_DIMENSIONS = {
-  width: 1088,
-  heigth: 1936,
+  width: 1080,
+  heigth: 1920,
 } as const;
 
 export interface IVideo {
